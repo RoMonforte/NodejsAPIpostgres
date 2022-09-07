@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
 const {logErrors, errorHandler, boomErrorHandler, ormErrorHandler} = require('./middlewares/error.handler')
+const {checkApiKey} = require ('./middlewares/auth.handler')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,7 +23,7 @@ app.use(cors(options));
 app.get('/', (req, res) => {
   res.send('Hola RmC checate este server en express');
 });
-app.get('/nueva-ruta', (req, res) => {
+app.get('/nueva-ruta', checkApiKey, (req, res) => {
   res.send('Hola RmC checate esta nueva ruta');
 });
 
