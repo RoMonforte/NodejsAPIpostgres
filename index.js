@@ -20,6 +20,8 @@ const options = {
 }
 app.use(cors(options));
 
+require('./utils/auth');
+
 app.get('/', (req, res) => {
   res.send('Hola RmC checate este server en express');
 });
